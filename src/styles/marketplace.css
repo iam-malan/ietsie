@@ -6,7 +6,8 @@
 
 .container {
   width: 100%;
-  margin: 0;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 2rem;
 }
 
@@ -185,7 +186,8 @@
   justify-content: center;
   gap: 1rem;
   width: 100%;
-  margin: 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .tag {
@@ -248,7 +250,8 @@
 .dashboard-content {
   padding: 2rem;
   width: 100%;
-  margin: 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .dashboard-grid {

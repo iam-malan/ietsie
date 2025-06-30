@@ -1,16 +1,16 @@
 import { BrowserRouter as Router } from 'react-router-dom';
-// import { AuthProvider } from './context/AuthContext';
+import { SellerAuthProvider } from './context/SellerAuthContext';
 import AppRouter from './routes/AppRouter';
 import './App.css';
 
 function App() {
   return (
     <Router>
-      {/* <AuthProvider> */}
+      <SellerAuthProvider>
         <div className="App">
           <AppRouter />
         </div>
-      {/* </AuthProvider> */}
+      </SellerAuthProvider>
     </Router>
   );
 }

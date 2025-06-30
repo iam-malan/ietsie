@@ -1,0 +1,94 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection
+    match /users/{userId} {
+      // Users can read and write their own profile
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Allow reading user profiles for shop owners (public info only)
+      allow read: if request.auth != null && 
+        resource.data.role == 'seller' && 
+        resource.data.isActive == true;
+    }
+    
+    // Shops collection
+    match /shops/{shopId} {
+      // Anyone can read active shops
+      allow read: if resource.data.isActive == true;
+      
+      // Shop owners can create and update their own shops
+      allow create: if request.auth != null && 
+        request.auth.uid == resource.data.ownerId &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'seller';
+      
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.ownerId;
+      
+      // Shop owners can delete their own shops (set isActive to false)
+      allow delete: if false; // We don't allow actual deletion, only deactivation
+    }
+    
+    // Products collection
+    match /products/{productId} {
+      // Anyone can read active products
+      allow read: if resource.data.status == 'active';
+      
+      // Shop owners can manage their products
+      allow create, update: if request.auth != null && 
+        request.auth.uid == get(/databases/$(database)/documents/shops/$(resource.data.shopId)).data.ownerId;
+      
+      allow delete: if false; // We don't allow actual deletion, only status change
+    }
+    
+    // Orders collection
+    match /orders/{orderId} {
+      // Buyers and sellers can read their own orders
+      allow read: if request.auth != null && 
+        (request.auth.uid == resource.data.buyerId || 
+         request.auth.uid == resource.data.sellerId);
+      
+      // Only buyers can create orders
+      allow create: if request.auth != null && 
+        request.auth.uid == resource.data.buyerId;
+      
+      // Sellers can update order status
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.sellerId &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'tracking', 'updatedAt']);
+    }
+    
+    // Messages collection
+    match /messages/{messageId} {
+      // Users can read messages they're involved in
+      allow read: if request.auth != null && 
+        (request.auth.uid == resource.data.senderId || 
+         request.auth.uid == resource.data.receiverId);
+      
+      // Users can send messages
+      allow create: if request.auth != null && 
+        request.auth.uid == resource.data.senderId;
+      
+      // Users can mark their received messages as read
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.receiverId &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isRead']);
+    }
+    
+    // Reviews collection
+    match /reviews/{reviewId} {
+      // Anyone can read reviews
+      allow read: if true;
+      
+      // Buyers can create reviews for their orders
+      allow create: if request.auth != null && 
+        request.auth.uid == resource.data.buyerId &&
+        exists(/databases/$(database)/documents/orders/$(resource.data.orderId));
+      
+      // Shop owners can respond to reviews
+      allow update: if request.auth != null && 
+        request.auth.uid == get(/databases/$(database)/documents/shops/$(resource.data.shopId)).data.ownerId &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['response']);
+    }
+  }
+}

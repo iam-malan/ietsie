@@ -1,16 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
+import { useSeller } from '../../hooks/useSeller';
 
 const SellerDashboard: React.FC = () => {
-  const { user } = useUser();
+  const { user, shop, hasShop, isLoading } = useSeller();
+
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading your dashboard...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="seller-dashboard">
       <header className="seller-header">
         <div className="header-content">
-          <h1>Your shop</h1>
+          <h1>{shop ? shop.name : 'Your shop'}</h1>
           <p>Welcome to your seller dashboard, {user?.firstName}!</p>
+          {!hasShop && (
+            <div className="setup-notice">
+              <p>Complete your shop setup to start selling</p>
+            </div>
+          )}
         </div>
         <div className="header-actions">
           <Link to="/sell/shop/edit" className="btn btn-outline">

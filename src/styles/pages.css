@@ -44,7 +44,7 @@
 
 .browse-content {
   display: flex;
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   gap: 2rem;
   padding: 2rem;
@@ -114,7 +114,7 @@
 }
 
 .categories-content {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }

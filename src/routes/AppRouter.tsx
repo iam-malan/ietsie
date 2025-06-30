@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 
 // Import layout components
 import Header from '../components/layout/Header';
+import ScrollToTop from '../components/layout/ScrollToTop';
+import ScrollToTopButton from '../components/layout/ScrollToTopButton';
 
 // Import page components
 import LandingPage from '../pages/LandingPage';
@@ -18,10 +20,12 @@ import SellerDashboard from '../pages/seller/SellerDashboard';
 
 // Import auth components
 import ProtectedRoute from '../components/auth/ProtectedRoute';
+import SellerProtectedRoute from '../components/auth/SellerProtectedRoute';
 
 const AppRouter: React.FC = () => {
   return (
     <>
+      <ScrollToTop />
       <Header />
       <main className="main-content">
         <Routes>
@@ -36,20 +40,20 @@ const AppRouter: React.FC = () => {
           <Route 
             path="/sell/dashboard" 
             element={
-              <ProtectedRoute>
+              <SellerProtectedRoute>
                 <SellerDashboard />
-              </ProtectedRoute>
+              </SellerProtectedRoute>
             } 
           />
           <Route 
             path="/sell/onboarding" 
             element={
-              <ProtectedRoute>
+              <SellerProtectedRoute requireSeller={false}>
                 <div className="page-placeholder">
                   <h2>Shop Setup</h2>
                   <p>Coming soon - Complete your shop setup</p>
                 </div>
-              </ProtectedRoute>
+              </SellerProtectedRoute>
             } 
           />
           
@@ -147,6 +151,7 @@ const AppRouter: React.FC = () => {
           <Route path="*" element={<LandingPage />} />
         </Routes>
       </main>
+      <ScrollToTopButton />
     </>
   );
 };
