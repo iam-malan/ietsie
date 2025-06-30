@@ -1,0 +1,106 @@
+// src/context/AuthContext.tsx
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useAuth as useClerkAuth } from '@clerk/clerk-react';
+import { doc, getDoc, setDoc, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { db } from '../api/firebase';
+import type { User } from '../types/index';
+
+interface AuthContextType {
+  user: User | null;
+  isLoading: boolean;
+  error: string | null;
+  refreshUser: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const { user: clerkUser, isSignedIn, isLoaded } = useClerkAuth();
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const createOrUpdateUser = async (clerkUser: any): Promise<User> => {
+    const userRef = doc(db, 'users', clerkUser.id);
+    const userSnap = await getDoc(userRef);
+
+    const userData: Omit<User, 'id'> = {
+      clerkId: clerkUser.id,
+      email: clerkUser.emailAddresses[0]?.emailAddress || '',
+      firstName: clerkUser.firstName || '',
+      lastName: clerkUser.lastName || '',
+      profileImage: clerkUser.imageUrl,
+      createdAt: userSnap.exists() ? userSnap.data().createdAt : serverTimestamp() as any,
+      updatedAt: serverTimestamp() as any,
+      isEmailVerified: clerkUser.emailAddresses[0]?.verification?.status === 'verified',
+      role: userSnap.exists() ? userSnap.data().role : 'buyer',
+      preferences: userSnap.exists() ? userSnap.data().preferences : {
+        notifications: {
+          email: true,
+          push: true,
+          marketing: false,
+        },
+        language: 'en',
+        currency: 'ZAR',
+      },
+    };
+
+    await setDoc(userRef, userData, { merge: true });
+
+    return {
+      id: clerkUser.id,
+      ...userData,
+    } as User;
+  };
+
+  const refreshUser = async () => {
+    if (!clerkUser || !isSignedIn) {
+      setUser(null);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+      const userData = await createOrUpdateUser(clerkUser);
+      setUser(userData);
+    } catch (err) {
+      console.error('Error fetching user data:', err);
+      setError('Failed to load user data');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      refreshUser();
+    }
+  }, [clerkUser, isSignedIn, isLoaded]);
+
+  const value: AuthContextType = {
+    user,
+    isLoading: !isLoaded || isLoading,
+    error,
+    refreshUser,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

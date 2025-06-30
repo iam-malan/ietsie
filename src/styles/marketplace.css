@@ -1,0 +1,367 @@
+/* Marketplace homepage styles */
+
+.marketplace-home {
+  min-height: calc(100vh - 70px);
+}
+
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0 2rem;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  color: white;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-bar {
+  display: flex;
+  max-width: 500px;
+  margin: 2rem auto 0;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #333;
+}
+
+.search-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background: #45a049;
+}
+
+/* Featured Categories */
+.featured-categories {
+  padding: 4rem 0;
+  background: white;
+}
+
+.featured-categories h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  margin: 0;
+}
+
+.category-card {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.category-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-placeholder {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.category-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Featured Products */
+.featured-products {
+  padding: 4rem 0;
+  background: #f8f9fa;
+}
+
+.featured-products h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.product-placeholder {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Popular Section */
+.popular-section {
+  padding: 4rem 0;
+  background: white;
+}
+
+.popular-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.popular-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 0;
+}
+
+.tag {
+  background: #f0f0f0;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: #4CAF50;
+  color: white;
+}
+
+/* Seller CTA */
+.seller-cta {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #2196F3 0%, #4CAF50 100%);
+  color: white;
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-content p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Customer Dashboard */
+.customer-dashboard {
+  min-height: calc(100vh - 70px);
+  background: #f8f9fa;
+  width: 100%;
+}
+
+.dashboard-header {
+  background: white;
+  padding: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.dashboard-content {
+  padding: 2rem;
+  width: 100%;
+  margin: 0;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.dashboard-card p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.card-preview {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.no-items {
+  color: #999;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.sub-text {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.setting-link {
+  color: #4CAF50;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.setting-link:hover {
+  color: #45a049;
+}
+
+.seller-promotion {
+  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  color: white;
+}
+
+.seller-promotion h3,
+.seller-promotion p {
+  color: white;
+}
+
+.promotion-content {
+  margin: 1rem 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    border-radius: 8px;
+  }
+
+  .search-button {
+    border-radius: 0 0 8px 8px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .category-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .image-placeholder {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .popular-tags {
+    justify-content: flex-start;
+  }
+}
