@@ -1,0 +1,101 @@
+/* Floating Elements Styles */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(74, 99, 84, 0.1) 0%, rgba(168, 181, 163, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(74, 99, 84, 0.1);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.floating-circle-1 {
+  width: 120px;
+  height: 120px;
+  top: 10%;
+  left: 10%;
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.floating-circle-2 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  right: 15%;
+  animation: float 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.floating-circle-3 {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  left: 5%;
+  animation: float 8s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.floating-circle-4 {
+  width: 60px;
+  height: 60px;
+  top: 40%;
+  right: 20%;
+  animation: float 5s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.floating-circle-5 {
+  width: 100px;
+  height: 100px;
+  bottom: 20%;
+  left: 20%;
+  animation: float 7s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.floating-circle-6 {
+  width: 90px;
+  height: 90px;
+  bottom: 30%;
+  right: 10%;
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+/* Additional floating animation variants */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% { 
+    transform: translateY(-20px) translateX(10px) rotate(90deg);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translateY(-30px) translateX(0px) rotate(180deg);
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(-10px) translateX(-10px) rotate(270deg);
+    opacity: 0.8;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .floating-circle {
+    display: none; /* Hide on mobile for performance */
+  }
+}

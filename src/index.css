@@ -1,12 +1,15 @@
-/* Reset and base styles - optimized for the application */
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Import design system variables */
+@import './styles/variables.css';
 
-  /* Use light theme by default */
-  color: #213547;
-  background-color: #ffffff;
+/* Reset and base styles - following Ietsie brand design system */
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: var(--leading-normal);
+  font-weight: var(--font-normal);
+
+  /* Use brand colors */
+  color: var(--text-dark);
+  background-color: var(--bg-white);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

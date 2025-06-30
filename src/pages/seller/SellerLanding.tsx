@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/clerk-react';
+import FloatingElements from '../../components/ui/FloatingElements';
+import '../../styles/seller-landing.css';
 
 const SellerLanding: React.FC = () => {
   return (
     <div className="seller-landing">
+      <FloatingElements />
       {/* Hero Section */}
       <section className="seller-hero">
         <div className="container">
           <div className="hero-content">
             <h1>Turn your creative passion into profit</h1>
-            <p>Join thousands of South African artisans already selling on Ietsie</p>
+            <p>Join thousands of South African artisans building thriving businesses on Ietsie</p>
             
             <div className="stats">
               <div className="stat">
@@ -87,23 +90,33 @@ const SellerLanding: React.FC = () => {
           <div className="benefits-grid">
             <div className="benefit">
               <div className="benefit-icon">🇿🇦</div>
-              <h3>Support local</h3>
-              <p>Connect with South African buyers who value local craftsmanship</p>
+              <h3>Proudly South African</h3>
+              <p>Connect with local buyers who celebrate South African creativity and craftsmanship</p>
             </div>
             <div className="benefit">
-              <div className="benefit-icon">💰</div>
-              <h3>Low fees</h3>
-              <p>Keep more of what you earn with our competitive fee structure</p>
+              <div className="benefit-icon">💎</div>
+              <h3>Premium positioning</h3>
+              <p>Showcase your unique handmade items to customers seeking authentic, quality products</p>
             </div>
             <div className="benefit">
-              <div className="benefit-icon">📱</div>
-              <h3>Easy to use</h3>
-              <p>User-friendly tools make it simple to manage your shop</p>
+              <div className="benefit-icon">📈</div>
+              <h3>Grow your business</h3>
+              <p>Access powerful analytics and marketing tools to scale your creative business</p>
+            </div>
+            <div className="benefit">
+              <div className="benefit-icon">🤝</div>
+              <h3>Community support</h3>
+              <p>Join a vibrant community of makers with resources, workshops, and peer support</p>
             </div>
             <div className="benefit">
               <div className="benefit-icon">🚀</div>
-              <h3>Marketing support</h3>
-              <p>Get featured in our marketing campaigns and social media</p>
+              <h3>Marketing boost</h3>
+              <p>Get featured in our campaigns, newsletters, and social media to reach new customers</p>
+            </div>
+            <div className="benefit">
+              <div className="benefit-icon">💰</div>
+              <h3>Competitive fees</h3>
+              <p>Keep more of what you earn with transparent, fair pricing that grows with you</p>
             </div>
           </div>
         </div>
@@ -112,22 +125,22 @@ const SellerLanding: React.FC = () => {
       {/* Success stories */}
       <section className="success-stories">
         <div className="container">
-          <h2>Success stories</h2>
+          <h2>Real success stories from our makers</h2>
           <div className="stories-grid">
             <div className="story">
               <div className="story-image"></div>
-              <h3>Nomsa's Beadwork</h3>
-              <p>"I started with just R500 and now make R15,000 a month selling my traditional beadwork!"</p>
+              <h3>Nomsa's Traditional Beadwork</h3>
+              <p>"I started with just R500 from my grandmother's beadwork patterns. Now I employ three local women and make R25,000 a month celebrating our Zulu heritage!"</p>
             </div>
             <div className="story">
               <div className="story-image"></div>
-              <h3>Cape Town Pottery</h3>
-              <p>"Ietsie helped me reach customers across South Africa. My pottery business has grown 300%!"</p>
+              <h3>Cape Town Ceramics Co.</h3>
+              <p>"What began as a weekend hobby turned into my full-time passion. Ietsie connected me with customers worldwide who love South African design. My revenue grew 400% in one year!"</p>
             </div>
             <div className="story">
               <div className="story-image"></div>
-              <h3>Johannesburg Jewelry</h3>
-              <p>"The support and community on Ietsie is amazing. I've learned so much from other sellers."</p>
+              <h3>Karoo Leather Works</h3>
+              <p>"From a small farm in the Karoo to customers in Joburg and Cape Town. The seller community taught me everything about online business. Now I'm expanding internationally!"</p>
             </div>
           </div>
         </div>
@@ -136,19 +149,31 @@ const SellerLanding: React.FC = () => {
       {/* Final CTA */}
       <section className="final-cta">
         <div className="container">
-          <h2>Ready to start your Ietsie shop?</h2>
-          <p>Join thousands of successful South African sellers</p>
+          <h2>Your creative journey starts here</h2>
+          <p>Join the Ietsie family and turn your passion into a thriving South African business</p>
           <SignedOut>
-            <SignUpButton mode="modal" forceRedirectUrl="/sell/onboarding">
-              <button className="btn btn-primary btn-large">
-                Start selling today
-              </button>
-            </SignUpButton>
+            <div className="cta-buttons">
+              <SignUpButton mode="modal" forceRedirectUrl="/sell/onboarding">
+                <button className="btn btn-primary btn-large">
+                  Start your shop journey
+                </button>
+              </SignUpButton>
+              <SignInButton mode="modal" forceRedirectUrl="/sell/dashboard">
+                <button className="btn btn-outline btn-large">
+                  I'm already a seller
+                </button>
+              </SignInButton>
+            </div>
           </SignedOut>
           <SignedIn>
-            <Link to="/sell/onboarding" className="btn btn-primary btn-large">
-              Set up your shop now
-            </Link>
+            <div className="signed-in-actions">
+              <Link to="/sell/onboarding" className="btn btn-primary btn-large">
+                Complete shop setup
+              </Link>
+              <Link to="/sell/dashboard" className="btn btn-outline btn-large">
+                Go to dashboard
+              </Link>
+            </div>
           </SignedIn>
         </div>
       </section>
